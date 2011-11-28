@@ -88,10 +88,10 @@ module ActsAsTaggableOn::Taggable
           return scoped(:conditions => "1 = 0") unless tags.length == tag_list.length
 
           tags.each do |tag|
-            safe_tag = tag.name.gsub(/[^a-zA-Z0-9]/, '').gsub(/[aeiou1-9]/i).slice(0,5)
+            safe_tag = tag.name.gsub(/[^a-zA-Z0-9]/, '').gsub(/[aeiou1-9]/i,'').slice(0,5)
             prefix   = "#{safe_tag}_#{rand(1024)}"
 
-            taggings_alias = "#{table_name.gsub(/[aeiou1-9]/i).slice(0,5)}_taggings_#{prefix}"
+            taggings_alias = "#{table_name.gsub(/[aeiou1-9]/i,'').slice(0,5)}_taggings_#{prefix}"
 
             tagging_join  = "JOIN #{ActsAsTaggableOn::Tagging.table_name} #{taggings_alias}" +
                             "  ON #{taggings_alias}.taggable_id = #{table_name}.#{primary_key}" +
