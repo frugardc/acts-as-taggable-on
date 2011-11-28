@@ -94,7 +94,7 @@ module ActsAsTaggableOn::Taggable
           taggings_context = context ? "_#{context}" : ''
           
           #TODO: fix alias to be smaller
-          taggings_alias   = "#{alias_base_name.gsub(/[aeiouy]/,"").slice(0,5)}#{taggings_context.gsub(/[aeiouy]/,"").slice(0,5}_#{tags.map(&:safe_name).join('_').gsub(/[aeiouy]/,"").slice(0,5)}_#{rand(1024)}"
+          taggings_alias   = "#{alias_base_name.gsub(/[aeiouy]/,"").slice(0,5)}#{taggings_context.gsub(/[aeiouy]/,"").slice(0,5)}_#{tags.map(&:safe_name).join('_').gsub(/[aeiouy]/,"").slice(0,5)}_#{rand(1024)}"
 
           tagging_join  = "JOIN #{ActsAsTaggableOn::Tagging.table_name} #{taggings_alias}" +
                           "  ON #{taggings_alias}.taggable_id = #{table_name}.#{primary_key}" +
